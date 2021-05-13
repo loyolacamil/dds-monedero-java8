@@ -48,11 +48,10 @@ public class Cuenta {
       throw new SaldoInsuficienteException();
     }
     //redundante, se puede hacer con una variable
-    double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-    double limite = 1000 - montoExtraidoHoy;
-    if (dinero > limite) {
-      throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
-          + " diarios, límite: " + limite);
+
+    double limiteDeExtraccion = 1000;
+    if (this.dineroExtraidoEnElDia(LocalDate.now())+ dinero > limiteDeExtraccion) {
+      throw new MaximoExtraccionDiarioException();
     }
     new Movimiento(LocalDate.now(), dinero, false).agregateA(this);
   }
@@ -63,7 +62,7 @@ public class Cuenta {
     movimientos.add(movimiento);
   }
 
-  public double getMontoExtraidoA(LocalDate fecha) {
+  public double dineroExtraidoEnElDia (LocalDate fecha) {
     return getMovimientos().stream()
         .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))
         .mapToDouble(Movimiento::getMonto)
