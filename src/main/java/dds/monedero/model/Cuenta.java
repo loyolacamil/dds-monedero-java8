@@ -3,7 +3,7 @@ package dds.monedero.model;
 import dds.monedero.exceptions.MaximaCantidadDepositosException;
 import dds.monedero.exceptions.MaximoExtraccionDiarioException;
 import dds.monedero.exceptions.MontoNegativoException;
-import dds.monedero.exceptions.SaldoMenorException;
+import dds.monedero.exceptions.SaldoInsuficienteException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class Cuenta {
       throw new MontoNegativoException();
     }
     if (getSaldo() - dinero < 0) {
-      throw new SaldoMenorException("No puede extraer mas de " + getSaldo() + " $");
+      throw new SaldoInsuficienteException();
     }
     //redundante, se puede hacer con una variable
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());

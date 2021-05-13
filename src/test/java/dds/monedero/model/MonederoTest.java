@@ -3,7 +3,7 @@ package dds.monedero.model;
 import dds.monedero.exceptions.MaximaCantidadDepositosException;
 import dds.monedero.exceptions.MaximoExtraccionDiarioException;
 import dds.monedero.exceptions.MontoNegativoException;
-import dds.monedero.exceptions.SaldoMenorException;
+import dds.monedero.exceptions.SaldoInsuficienteException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,7 @@ public class MonederoTest {
 
   @Test
   void ExtraerMasQueElSaldo() {
-    assertThrows(SaldoMenorException.class, () -> {
+    assertThrows(SaldoInsuficienteException.class, () -> {
           cuenta.setSaldo(90);
           cuenta.extraer(1001);
     });
