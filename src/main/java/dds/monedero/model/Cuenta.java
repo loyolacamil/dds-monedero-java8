@@ -58,7 +58,6 @@ public class Cuenta {
 
   //definir bien en donde quiero el metodo, si en movimiento o en cuenta
   public void agregarMovimiento(Movimiento movimiento) {
-    Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
     movimientos.add(movimiento);
   }
 
