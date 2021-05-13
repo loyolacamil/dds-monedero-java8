@@ -18,23 +18,23 @@ public class Cuenta {
   public Cuenta() {
     saldo = 0;
   }
-  
+
   public void setMovimientos(List<Movimiento> movimientos) {
     this.movimientos = movimientos;
   }
 
   //feo nombre del metodo poner, poco expresivo -> depositar
-  public void poner(double cuanto) {
-    if (cuanto <= 0) {
+  public void depositar(double dinero) {
+    if (dinero <= 0) {
       //mandaria el mj directo a la excepcion
-      throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
+      throw new MontoNegativoException(dinero + ": el monto a ingresar debe ser un valor positivo");
     }
 
     if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
+    new Movimiento(LocalDate.now(), dinero, true).agregateA(this);
   }
 //no expresivo
   public void sacar(double cuanto) {
