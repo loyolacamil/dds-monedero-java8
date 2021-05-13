@@ -27,7 +27,7 @@ public class Cuenta {
   public void depositar(double dinero) {
     if (dinero <= 0) {
       //mandaria el mj directo a la excepcion
-      throw new MontoNegativoException(dinero + ": el monto a ingresar debe ser un valor positivo");
+      throw new MontoNegativoException();
     }
 
     if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
@@ -39,7 +39,7 @@ public class Cuenta {
 //no expresivo
   public void sacar(double cuanto) {
     if (cuanto <= 0) {
-      throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
+      throw new MontoNegativoException();
     }
     if (getSaldo() - cuanto < 0) {
       throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
