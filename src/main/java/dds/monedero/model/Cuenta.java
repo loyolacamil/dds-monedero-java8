@@ -14,15 +14,11 @@ public class Cuenta {
   private double saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
 //doble declaracion de variable
-  
+
   public Cuenta() {
     saldo = 0;
   }
-
-  public Cuenta(double montoInicial) {
-    saldo = montoInicial;
-  }
-
+  
   public void setMovimientos(List<Movimiento> movimientos) {
     this.movimientos = movimientos;
   }
