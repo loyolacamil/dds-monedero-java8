@@ -30,11 +30,16 @@ public class Cuenta {
       throw new MontoNegativoException();
     }
 
-    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
-      throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
+    if (this.depositosDelaFecha(LocalDate.now()) >= 3) {
+      throw new MaximaCantidadDepositosException();
     }
 
     new Movimiento(LocalDate.now(), dinero, true).agregateA(this);
+  }
+
+  public double depositosDelaFecha(LocalDate fecha){
+    return getMovimientos().stream().filter(movimiento -> movimiento.isDeposito())
+        .filter(movimiento -> movimiento.getFecha().equals(fecha)).count();
   }
 //no expresivo
   public void sacar(double cuanto) {
