@@ -36,7 +36,7 @@ public class Cuenta {
   }
 
   public double depositosDelaFecha(LocalDate fecha){
-    return getMovimientos().stream().filter(movimiento -> movimiento.isDeposito())
+    return getMovimientos().stream().filter(movimiento -> movimiento.esDeposito())
         .filter(movimiento -> movimiento.getFecha().equals(fecha)).count();
   }
 //no expresivo
@@ -62,7 +62,7 @@ public class Cuenta {
   }
   public double dineroExtraidoEnElDia (LocalDate fecha) {
     return getMovimientos().stream()
-        .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))
+        .filter(movimiento -> !movimiento.esDeposito() && movimiento.getFecha().equals(fecha))
         .mapToDouble(Movimiento::getMonto)
         .sum();
   }

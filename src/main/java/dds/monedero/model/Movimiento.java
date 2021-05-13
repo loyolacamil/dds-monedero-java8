@@ -23,27 +23,15 @@ public class Movimiento {
     return fecha;
   }
 
-  //metodos que no tienen sentido x ahora
-
-  public boolean esDeLaFecha(LocalDate fecha) {
-    return this.fecha.equals(fecha);
-  }
-
-  public boolean isDeposito() {
+  public boolean esDeposito() {
     return esDeposito;
   }
 
-  //se puede evitar
-  public boolean isExtraccion() {
-    return !esDeposito;
-  }
-
-
+/*
   public double calcularValor(Cuenta cuenta) {
     if (esDeposito) {
       return cuenta.getSaldo() + getMonto();
     } else {
       return cuenta.getSaldo() - getMonto();
-    }
-  }
+    }*/
 }
