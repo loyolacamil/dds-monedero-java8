@@ -40,21 +40,21 @@ public class Cuenta {
         .filter(movimiento -> movimiento.getFecha().equals(fecha)).count();
   }
 //no expresivo
-  public void sacar(double cuanto) {
-    if (cuanto <= 0) {
+  public void extraer(double dinero) {
+    if (dinero <= 0) {
       throw new MontoNegativoException();
     }
-    if (getSaldo() - cuanto < 0) {
-      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
+    if (getSaldo() - dinero < 0) {
+      throw new SaldoMenorException("No puede extraer mas de " + getSaldo() + " $");
     }
     //redundante, se puede hacer con una variable
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
     double limite = 1000 - montoExtraidoHoy;
-    if (cuanto > limite) {
+    if (dinero > limite) {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
     }
-    new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
+    new Movimiento(LocalDate.now(), dinero, false).agregateA(this);
   }
 
   //definir bien en donde quiero el metodo, si en movimiento o en cuenta
