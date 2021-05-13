@@ -53,14 +53,13 @@ public class Cuenta {
     if (this.dineroExtraidoEnElDia(LocalDate.now())+ dinero > limiteDeExtraccion) {
       throw new MaximoExtraccionDiarioException();
     }
-    new Movimiento(LocalDate.now(), dinero, false).agregateA(this);
+    this.agregarMovimiento(new Movimiento(LocalDate.now(),dinero,false));
   }
 
   //definir bien en donde quiero el metodo, si en movimiento o en cuenta
   public void agregarMovimiento(Movimiento movimiento) {
     movimientos.add(movimiento);
   }
-
   public double dineroExtraidoEnElDia (LocalDate fecha) {
     return getMovimientos().stream()
         .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))
