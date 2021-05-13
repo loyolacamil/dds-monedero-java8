@@ -23,6 +23,7 @@ public class Movimiento {
     return fecha;
   }
 
+  //metodos que no tienen sentido x ahora
   public boolean fueDepositado(LocalDate fecha) {
     return isDeposito() && esDeLaFecha(fecha);
   }
@@ -39,10 +40,12 @@ public class Movimiento {
     return esDeposito;
   }
 
+  //se puede evitar
   public boolean isExtraccion() {
     return !esDeposito;
   }
 
+ //redundante, ya tenemos el metodo en cuenta
   public void agregateA(Cuenta cuenta) {
     cuenta.setSaldo(calcularValor(cuenta));
     cuenta.agregarMovimiento(fecha, monto, esDeposito);

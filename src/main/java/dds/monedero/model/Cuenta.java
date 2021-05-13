@@ -11,9 +11,10 @@ import java.util.List;
 
 public class Cuenta {
 
-  private double saldo = 0;
+  private double saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
-
+//doble declaracion de variable
+  
   public Cuenta() {
     saldo = 0;
   }
@@ -26,8 +27,10 @@ public class Cuenta {
     this.movimientos = movimientos;
   }
 
+  //feo nombre del metodo poner, poco expresivo -> depositar
   public void poner(double cuanto) {
     if (cuanto <= 0) {
+      //mandaria el mj directo a la excepcion
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
 
@@ -37,7 +40,7 @@ public class Cuenta {
 
     new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
   }
-
+//no expresivo
   public void sacar(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
@@ -45,6 +48,7 @@ public class Cuenta {
     if (getSaldo() - cuanto < 0) {
       throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
     }
+    //redundante, se puede hacer con una variable
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
     double limite = 1000 - montoExtraidoHoy;
     if (cuanto > limite) {
@@ -54,6 +58,7 @@ public class Cuenta {
     new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
   }
 
+  //definir bien en donde quiero el metodo, si en movimiento o en cuenta
   public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
     Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
     movimientos.add(movimiento);
